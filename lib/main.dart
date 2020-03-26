@@ -140,18 +140,18 @@ class _ScreenAwalState extends State<ScreenAwal> {
     List<Widget> temp = [];
     for (var i = 0; i < bahasaSegments.length; i++) {
       //# JANGAN LEWAT WOY< KALAU, NULL
-      Color warna;
-      double aasf;
+      Color warna, warnafont;
+      double bgklik;
       if (indexArab == null) {
         warna = Colors.transparent;
-        aasf = 0;
+        bgklik = 0;
+        warnafont = Colors.black;
       } else {
         warna = i == mapping[indexArab]
             ? Color.fromRGBO(0, 182, 251, 0.9)
             : Colors.transparent;
-        aasf = i == mapping[indexArab]
-            ? 4
-            : 0;
+        bgklik = i == mapping[indexArab] ? 4 : 0;
+        warnafont = i == mapping[indexArab] ? warnafont= Colors.white : warnafont= Colors.black;
       }
 
       String data = bahasaSegments[i];
@@ -162,13 +162,14 @@ class _ScreenAwalState extends State<ScreenAwal> {
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: warna,
           ),
-          padding: EdgeInsets.symmetric(horizontal: aasf),
+          padding: EdgeInsets.symmetric(horizontal: bgklik),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2,horizontal:0 ),
+            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
             child: Text(
               '$data',
               textDirection: TextDirection.ltr,
               style: TextStyle(
+                color: warnafont,
                 fontSize: 14,
               ),
             ),
