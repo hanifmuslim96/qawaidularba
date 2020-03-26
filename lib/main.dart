@@ -93,21 +93,31 @@ class _ScreenAwalState extends State<ScreenAwal> {
       String data = arabicSegments[i];
       Widget widget = Padding(
         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 1),
-        child: InkWell(
-          onTap: () {
-            if (indexArab != i) {
-              indexArab = i;
-            } else {
-              indexArab = null;
-            }
-            print("Print here");
-            setState(() {});
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: warna,
+        child: Material(
+          textStyle: Theme.of(context).textTheme.title.copyWith(
+                color: Colors.white,
+              ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(10),
+              bottom: Radius.circular(10),
             ),
+          ),
+          color: warna,
+          // borderRadius: BorderRadius.all(Radius.circular(10)),
+
+          child: InkWell(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            splashColor: Colors.black38,
+            onTap: () {
+              if (indexArab != i) {
+                indexArab = i;
+              } else {
+                indexArab = null;
+              }
+              print("Print here");
+              setState(() {});
+            },
             child: Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
@@ -131,12 +141,17 @@ class _ScreenAwalState extends State<ScreenAwal> {
     for (var i = 0; i < bahasaSegments.length; i++) {
       //# JANGAN LEWAT WOY< KALAU, NULL
       Color warna;
+      double aasf;
       if (indexArab == null) {
         warna = Colors.transparent;
+        aasf = 0;
       } else {
         warna = i == mapping[indexArab]
             ? Color.fromRGBO(0, 182, 251, 0.9)
             : Colors.transparent;
+        aasf = i == mapping[indexArab]
+            ? 4
+            : 0;
       }
 
       String data = bahasaSegments[i];
@@ -147,8 +162,9 @@ class _ScreenAwalState extends State<ScreenAwal> {
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: warna,
           ),
+          padding: EdgeInsets.symmetric(horizontal: aasf),
           child: Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.symmetric(vertical: 2,horizontal:0 ),
             child: Text(
               '$data',
               textDirection: TextDirection.ltr,
@@ -167,92 +183,94 @@ class _ScreenAwalState extends State<ScreenAwal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(236, 241, 245, 1),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Center(
           child: Text(
-            'Qawaidul Arba',
+            'Al Qawaidul Arba',
             style: TextStyle(color: Colors.black),
           ),
         ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(236, 241, 245, 1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(30),
+            bottom: Radius.circular(30),
+          ),
         ),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(236, 241, 245, 1),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      // decoration: BoxDecoration(color: Colors.white),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          // mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color.fromRGBO(0, 182, 251, 0.9),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: EdgeInsets.all(20),
-                              child: DefaultTextStyle(
-                                style:
-                                    Theme.of(context).textTheme.title.copyWith(
-                                          color: Colors.white,
-                                        ),
-                                child: Wrap(
-                                  textDirection: TextDirection.rtl,
-                                  spacing: 4,
-                                  alignment: WrapAlignment.start,
-                                  runSpacing: 4,
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  // textDirection: TextDirection.rtl,
-                                  children: <Widget>[
-                                    ...renderArab(),
-                                  ],
-                                ),
-                              ),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(236, 241, 245, 1),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    // decoration: BoxDecoration(color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        // mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(0, 182, 251, 0.9),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
-                            Container(
-                              color: Colors.transparent,
-                              child: SizedBox(
-                                height: 20,
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(20),
+                            child: DefaultTextStyle(
+                              style: Theme.of(context).textTheme.title.copyWith(
+                                    color: Colors.white,
+                                  ),
                               child: Wrap(
-                                textDirection: TextDirection.ltr,
+                                textDirection: TextDirection.rtl,
+                                spacing: 4,
+                                alignment: WrapAlignment.start,
+                                runSpacing: 4,
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                // textDirection: TextDirection.rtl,
                                 children: <Widget>[
-                                  ...renderIndo(),
+                                  ...renderArab(),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Container(
+                            color: Colors.transparent,
+                            child: SizedBox(
+                              height: 20,
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            padding: EdgeInsets.all(20),
+                            child: Wrap(
+                              textDirection: TextDirection.ltr,
+                              children: <Widget>[
+                                ...renderIndo(),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          Text('data'),
+        ],
       ),
     );
   }
