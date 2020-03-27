@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:csv/csv.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(AplikasiBermanfaat());
@@ -21,8 +26,11 @@ class ScreenAwal extends StatefulWidget {
 
 class _ScreenAwalState extends State<ScreenAwal> {
   int indexArab = null;
+  int indexSlide = 0;
   var birulight = Color.fromRGBO(0, 182, 251, 0.9);
   double slidervalue = 1;
+
+  List<List<dynamic>> dataDalamList;
 
   List<String> arabicSegments = [
     'أَسْأَلُ اللهَ',
@@ -89,9 +97,11 @@ class _ScreenAwalState extends State<ScreenAwal> {
 
   List<Widget> renderArab() {
     List<Widget> temp = [];
-    for (var i = 0; i < arabicSegments.length; i++) {
+    var rawKasarArabic = dataDalamList[indexSlide][0].split("*");
+    print("Print here");
+    for (var i = 0; i < rawKasarArabic.length; i++) {
       Color warna = i == indexArab ? Colors.black38 : Colors.transparent;
-      String data = arabicSegments[i];
+      String data = rawKasarArabic[i];
       Widget widget = Padding(
         padding: EdgeInsets.symmetric(vertical: 1, horizontal: 1),
         child: Material(
@@ -139,7 +149,9 @@ class _ScreenAwalState extends State<ScreenAwal> {
 
   List<Widget> renderIndo() {
     List<Widget> temp = [];
-    for (var i = 0; i < bahasaSegments.length; i++) {
+    var rawKasarBahasa = dataDalamList[indexSlide][1].split("*");
+
+    for (var i = 0; i < rawKasarBahasa.length; i++) {
       //# JANGAN LEWAT WOY< KALAU, NULL
       Color warna, warnafont;
       double bgklik;
@@ -157,7 +169,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
             : warnafont = Colors.black;
       }
 
-      String data = bahasaSegments[i];
+      String data = rawKasarBahasa[i];
       Widget widget = Padding(
         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 1),
         child: Container(
@@ -191,6 +203,9 @@ class _ScreenAwalState extends State<ScreenAwal> {
   }
 
   void _showModalSheet() {
+    indexSlide += 1;
+    indexArab = null;
+    setState(() {});
     showModalBottomSheet(
       context: context,
       builder: (builder) {
@@ -198,19 +213,59 @@ class _ScreenAwalState extends State<ScreenAwal> {
           child: Flybtn(
             birulight: birulight,
             pintuNitipFunction: nitipFunction,
-            nitipValue:slidervalue,
+            nitipValue: slidervalue,
           ),
         );
       },
     );
   }
 
+  void parsecsv() {
+    _parsecsv();
+    print("Print here");
+  }
+
+  Future<void> _parsecsv() async {
+    String data = await rootBundle.loadString('assets/gmatan.tsv');
+    await Future.delayed(Duration(seconds: 2));
+    List<List<dynamic>> _dataDalamList =
+        CsvToListConverter(fieldDelimiter: "\t").convert(data);
+    print(_dataDalamList);
+    _dataDalamList.removeAt(0);
+    dataDalamList = _dataDalamList;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    parsecsv();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (dataDalamList == null) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(236, 241, 245, 1),
       appBar: AppBar(
         backgroundColor: Colors.white,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.phone,
+              size: 20,
+              color: Colors.red,
+            ),
+            onPressed: parsecsv,
+          )
+        ],
         title: Center(
           child: Text(
             'Al Qawaidul Arba',
@@ -346,7 +401,6 @@ class Flybtn extends StatefulWidget {
     @required this.birulight,
     @required this.pintuNitipFunction,
     @required this.nitipValue,
-
   }) : super(key: key);
 
   final Color birulight;
