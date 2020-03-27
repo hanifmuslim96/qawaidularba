@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
 void main() {
   runApp(AplikasiBermanfaat());
@@ -21,7 +20,9 @@ class ScreenAwal extends StatefulWidget {
 }
 
 class _ScreenAwalState extends State<ScreenAwal> {
-  int indexArab = 2;
+  int indexArab = null;
+  var birulight = Color.fromRGBO(0, 182, 251, 0.9);
+  double slidervalue = 1;
 
   List<String> arabicSegments = [
     'أَسْأَلُ اللهَ',
@@ -92,7 +93,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
       Color warna = i == indexArab ? Colors.black38 : Colors.transparent;
       String data = arabicSegments[i];
       Widget widget = Padding(
-        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 1),
+        padding: EdgeInsets.symmetric(vertical: 1, horizontal: 1),
         child: Material(
           textStyle: Theme.of(context).textTheme.title.copyWith(
                 color: Colors.white,
@@ -124,7 +125,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
                 '$data',
                 textDirection: TextDirection.rtl,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20 * slidervalue,
                 ),
               ),
             ),
@@ -151,7 +152,9 @@ class _ScreenAwalState extends State<ScreenAwal> {
             ? Color.fromRGBO(0, 182, 251, 0.9)
             : Colors.transparent;
         bgklik = i == mapping[indexArab] ? 4 : 0;
-        warnafont = i == mapping[indexArab] ? warnafont= Colors.white : warnafont= Colors.black;
+        warnafont = i == mapping[indexArab]
+            ? warnafont = Colors.white
+            : warnafont = Colors.black;
       }
 
       String data = bahasaSegments[i];
@@ -170,7 +173,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
               textDirection: TextDirection.ltr,
               style: TextStyle(
                 color: warnafont,
-                fontSize: 14,
+                fontSize: 14 * slidervalue,
               ),
             ),
           ),
@@ -179,6 +182,26 @@ class _ScreenAwalState extends State<ScreenAwal> {
       temp.add(widget);
     }
     return temp;
+  }
+
+  nitipFunction(x) {
+    print(x);
+    slidervalue = x;
+    setState(() {});
+  }
+
+  void _showModalSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (builder) {
+        return Container(
+          child: Flybtn(
+            birulight: birulight,
+            pintuNitipFunction: nitipFunction,
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -204,6 +227,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
         children: <Widget>[
           Expanded(
             child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Container(
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(236, 241, 245, 1),
@@ -211,33 +235,47 @@ class _ScreenAwalState extends State<ScreenAwal> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    // decoration: BoxDecoration(color: Colors.white),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        // mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           Container(
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(0, 182, 251, 0.9),
+                              color: birulight,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
                             child: DefaultTextStyle(
                               style: Theme.of(context).textTheme.title.copyWith(
                                     color: Colors.white,
                                   ),
-                              child: Wrap(
-                                textDirection: TextDirection.rtl,
-                                spacing: 4,
-                                alignment: WrapAlignment.start,
-                                runSpacing: 4,
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                // textDirection: TextDirection.rtl,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: <Widget>[
-                                  ...renderArab(),
+                                  Text(
+                                    '  Arabic',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Wrap(
+                                    textDirection: TextDirection.rtl,
+                                    spacing: 1,
+                                    alignment: WrapAlignment.start,
+                                    runSpacing: 1,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    // textDirection: TextDirection.rtl,
+                                    children: <Widget>[
+                                      ...renderArab(),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -255,10 +293,25 @@ class _ScreenAwalState extends State<ScreenAwal> {
                                   BorderRadius.all(Radius.circular(10)),
                             ),
                             padding: EdgeInsets.all(20),
-                            child: Wrap(
-                              textDirection: TextDirection.ltr,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
-                                ...renderIndo(),
+                                Text(
+                                  'Indonesian',
+                                  style: TextStyle(
+                                    color: birulight,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Wrap(
+                                  textDirection: TextDirection.ltr,
+                                  children: <Widget>[
+                                    ...renderIndo(),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -270,8 +323,57 @@ class _ScreenAwalState extends State<ScreenAwal> {
               ),
             ),
           ),
-          Text('data'),
+          Text('sumber : muslim.or.id'),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: birulight,
+        splashColor: Colors.black38,
+        child: Icon(
+          Icons.text_fields,
+          size: 20,
+        ),
+        onPressed: _showModalSheet,
+      ),
+    );
+  }
+}
+
+class Flybtn extends StatefulWidget {
+  const Flybtn({
+    Key key,
+    @required this.birulight,
+    @required this.pintuNitipFunction,
+  }) : super(key: key);
+
+  final Color birulight;
+  final Function pintuNitipFunction;
+
+  @override
+  _FlybtnState createState() => _FlybtnState();
+}
+
+class _FlybtnState extends State<Flybtn> {
+  double slidervalue = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      child: Container(
+        child: Slider(
+          value: slidervalue,
+          onChanged: (x) {
+            widget.pintuNitipFunction(x);
+            print(x);
+            slidervalue = x;
+            setState(() {});
+          },
+          divisions: 4,
+          min: 0.8,
+          max: 1.2,
+        ),
       ),
     );
   }
