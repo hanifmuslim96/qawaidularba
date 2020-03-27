@@ -198,6 +198,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
           child: Flybtn(
             birulight: birulight,
             pintuNitipFunction: nitipFunction,
+            nitipValue:slidervalue,
           ),
         );
       },
@@ -344,17 +345,26 @@ class Flybtn extends StatefulWidget {
     Key key,
     @required this.birulight,
     @required this.pintuNitipFunction,
+    @required this.nitipValue,
+
   }) : super(key: key);
 
   final Color birulight;
   final Function pintuNitipFunction;
+  final double nitipValue;
 
   @override
   _FlybtnState createState() => _FlybtnState();
 }
 
 class _FlybtnState extends State<Flybtn> {
-  double slidervalue = 1;
+  double slidervalue;
+
+  @override
+  void initState() {
+    super.initState();
+    slidervalue = widget.nitipValue;
+  }
 
   @override
   Widget build(BuildContext context) {
