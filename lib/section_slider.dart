@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class SectionSlider extends StatefulWidget {
+  SectionSlider(this.index);
+  final int index;
   @override
   _SectionSliderState createState() => _SectionSliderState();
 }
@@ -15,27 +17,6 @@ class _SectionSliderState extends State<SectionSlider> {
   double slidervalue = 1;
 
   List<List<dynamic>> dataDalamList;
-
-  List<String> arabicSegments = [
-    'أَسْأَلُ اللهَ',
-    'الْكَرِيمَ',
-    'رَبَّ الْعَرْشِ الْعَظِيمِ',
-    'أَنْ يَتَوَلَّاكَ',
-    'فِي الدُّنْيَا وَالآخِرَةِ،',
-    'وَأَنْ يَجْعَلَكَ',
-    'مُبَارَكًا',
-    'أَيْنَمَا كُنْتَ،',
-    'وَأَنْ يَجْعَلَكَ مِمَّنْ',
-    'إِذَا أُعْطِيَ',
-    'شَكَرَ،',
-    'وَإِذَا ابْتُلِيَ',
-    'صَبَرَ،',
-    'وَإِذَا أذَنبَ',
-    'اسْتَغْفَرَ.',
-    'فَإِنَّ هَؤُلاءِ الثَّلاثَ',
-    'عُنْوَانُ',
-    'السَّعَادَةِ',
-  ];
 
   List<int> mapping = [
     0,
@@ -56,32 +37,6 @@ class _SectionSliderState extends State<SectionSlider> {
     15,
     16,
     17,
-  ];
-
-  List<String> bahasaSegments = [
-    'Saya memohon kepada Allah',
-    'Yang Maha Pemurah',
-    'Tuhan ‘Arsy yang agung',
-    'agar memeliharamu',
-    'di dunia dan akhirat,',
-    'menjadikanmu',
-    'diberkahi',
-    'di manapun berada,',
-    'menjadikanmu',
-    'bersyukur',
-    'saat diberi nikmat,',
-    'bersabar',
-    'ketika ditimpa musibah,',
-    'dan meminta ampun',
-    'jika berbuat dosa.',
-    'Tiga hal terakhir yang telah disebutkan di atas',
-    'adalah kunci',
-    'kebahagiaan.',
-  ];
-
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=400&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=400&q=80',
   ];
 
   List<Widget> renderArab(pintu) {
@@ -216,7 +171,7 @@ class _SectionSliderState extends State<SectionSlider> {
   }
 
   Future<void> _parsecsv() async {
-    String data = await rootBundle.loadString('assets/gmatan.tsv');
+    String data = await rootBundle.loadString('data/content${widget.index}.tsv');
     await Future.delayed(Duration(seconds: 2));
     List<List<dynamic>> _dataDalamList =
         CsvToListConverter(fieldDelimiter: "\t").convert(data);

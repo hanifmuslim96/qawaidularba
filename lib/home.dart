@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qawaidularba/pendahuluan.dart';
+import 'package:qawaidularba/section_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   Color biru = Color.fromRGBO(0, 182, 251, 0.9);
@@ -141,7 +141,7 @@ class HomeScreen extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) {
-                                            return SectionSlider();
+                                            return SectionSlider(0);
                                           },
                                         ),
                                       );
@@ -181,24 +181,36 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        'القاعدة الأولى',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontFamily: 'AraHamahKilania',
-                                          color: Colors.black,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return SectionSlider(1);
+                                          },
                                         ),
-                                      ),
-                                      Text(
-                                        'Kaidah Pertama',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.black54,
+                                      );
+                                    },
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          'القاعدة الأولى',
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: 'AraHamahKilania',
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          'Kaidah Pertama',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -215,24 +227,36 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        'القاعدة الثانية',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontFamily: 'AraHamahKilania',
-                                          color: Colors.black,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return SectionSlider(2);
+                                          },
                                         ),
-                                      ),
-                                      Text(
-                                        'Kaidah Kedua',
-                                        style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 16,
+                                      );
+                                    },
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          'القاعدة الثانية',
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: 'AraHamahKilania',
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          'Kaidah Kedua',
+                                          style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -249,24 +273,36 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        'القاعدة الثالثة',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontFamily: 'AraHamahKilania',
-                                          color: Colors.black,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return SectionSlider(3);
+                                          },
                                         ),
-                                      ),
-                                      Text(
-                                        'Kaidah Ketiga',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.black54,
+                                      );
+                                    },
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          'القاعدة الثالثة',
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: 'AraHamahKilania',
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          'Kaidah Ketiga',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -283,24 +319,36 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        'القاعدة الرابعة',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontFamily: 'AraHamahKilania',
-                                          color: Colors.black,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return SectionSlider(4);
+                                          },
                                         ),
-                                      ),
-                                      Text(
-                                        'Kaidah Keempat',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.black54,
+                                      );
+                                    },
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          'القاعدة الرابعة',
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: 'AraHamahKilania',
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          'Kaidah Keempat',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
