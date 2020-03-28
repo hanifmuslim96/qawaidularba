@@ -105,8 +105,8 @@ class _ScreenAwalState extends State<ScreenAwal> {
     List<Widget> temp = [];
     print(pintu);
 
-    var rawKasarArabic = dataDalamList[pintu[2]-1][0].split("*");
-    
+    var rawKasarArabic = dataDalamList[pintu[2] - 1][0].split("*");
+
     print("Print here");
     for (var i = 0; i < rawKasarArabic.length; i++) {
       Color warna = i == indexArab ? Colors.black38 : Colors.transparent;
@@ -159,7 +159,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
   List<Widget> renderIndo(pintu) {
     print(pintu);
     List<Widget> temp = [];
-    var rawKasarBahasa = dataDalamList[pintu[2]-1][1].split("*");
+    var rawKasarBahasa = dataDalamList[pintu[2] - 1][1].split("*");
 
     for (var i = 0; i < rawKasarBahasa.length; i++) {
       //# JANGAN LEWAT WOY< KALAU, NULL
@@ -213,21 +213,18 @@ class _ScreenAwalState extends State<ScreenAwal> {
   }
 
   void _showModalSheet() {
-    indexSlide += 1;
-    indexArab = null;
-    setState(() {});
-    // showModalBottomSheet(
-    //   context: context,
-    //   builder: (builder) {
-    //     return Container(
-    //       child: Flybtn(
-    //         birulight: birulight,
-    //         pintuNitipFunction: nitipFunction,
-    //         nitipValue: slidervalue,
-    //       ),
-    //     );
-    //   },
-    // );
+    showModalBottomSheet(
+      context: context,
+      builder: (builder) {
+        return Container(
+          child: Flybtn(
+            birulight: birulight,
+            pintuNitipFunction: nitipFunction,
+            nitipValue: slidervalue,
+          ),
+        );
+      },
+    );
   }
 
   void parsecsv() {
@@ -280,50 +277,102 @@ class _ScreenAwalState extends State<ScreenAwal> {
           ),
         ),
       ),
-      body: CarouselSlider(
-        // reverse: false,
-        enableInfiniteScroll: false,
-        items: dataDalamList.map((url) {
-          print(url);
-          return Column(
-            children: <Widget>[
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(236, 241, 245, 1),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: birulight,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        child: CarouselSlider(
+          onPageChanged: (a) {
+            print("Print here");
+            indexArab = null;
+            setState(() {});
+          },
+          viewportFraction: 1.0,
+          aspectRatio: MediaQuery.of(context).size.aspectRatio,
+          // reverse: false,
+          enableInfiniteScroll: false,
+          items: dataDalamList.map((url) {
+            print(url);
+            return Column(
+              children: <Widget>[
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(236, 241, 245, 1),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: birulight,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  padding: EdgeInsets.all(10),
+                                  child: DefaultTextStyle(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .title
+                                        .copyWith(
+                                          color: Colors.white,
+                                        ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: <Widget>[
+                                        Text(
+                                          '  Arabic',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Wrap(
+                                          textDirection: TextDirection.rtl,
+                                          spacing: 1,
+                                          alignment: WrapAlignment.start,
+                                          runSpacing: 1,
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.center,
+                                          // textDirection: TextDirection.rtl,
+                                          children: <Widget>[
+                                            ...renderArab(url),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                padding: EdgeInsets.all(10),
-                                child: DefaultTextStyle(
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .title
-                                      .copyWith(
-                                        color: Colors.white,
-                                      ),
+                                Container(
+                                  color: Colors.transparent,
+                                  child: SizedBox(
+                                    height: 20,
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  padding: EdgeInsets.all(20),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
                                     children: <Widget>[
                                       Text(
-                                        '  Arabic',
+                                        'Indonesian',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: birulight,
                                           fontSize: 16,
                                         ),
                                       ),
@@ -331,75 +380,33 @@ class _ScreenAwalState extends State<ScreenAwal> {
                                         height: 5,
                                       ),
                                       Wrap(
-                                        textDirection: TextDirection.rtl,
-                                        spacing: 1,
-                                        alignment: WrapAlignment.start,
-                                        runSpacing: 1,
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.center,
-                                        // textDirection: TextDirection.rtl,
+                                        textDirection: TextDirection.ltr,
                                         children: <Widget>[
-                                          ...renderArab(url),
+                                          ...renderIndo(url),
                                         ],
                                       ),
                                     ],
                                   ),
                                 ),
-                              ),
-                              Container(
-                                color: Colors.transparent,
-                                child: SizedBox(
-                                  height: 20,
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                ),
-                                padding: EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    Text(
-                                      'Indonesian',
-                                      style: TextStyle(
-                                        color: birulight,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Wrap(
-                                      textDirection: TextDirection.ltr,
-                                      children: <Widget>[
-                                        ...renderIndo(url),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Text('sumber : muslim.or.id'),
-            ],
-          );
-        }).toList(),
+                Text('sumber : muslim.or.id'),
+              ],
+            );
+          }).toList(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: birulight,
         splashColor: Colors.black38,
         child: Icon(
-          Icons.navigate_next,
+          Icons.text_fields,
           size: 20,
         ),
         onPressed: _showModalSheet,
