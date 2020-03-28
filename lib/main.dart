@@ -206,18 +206,18 @@ class _ScreenAwalState extends State<ScreenAwal> {
     indexSlide += 1;
     indexArab = null;
     setState(() {});
-    showModalBottomSheet(
-      context: context,
-      builder: (builder) {
-        return Container(
-          child: Flybtn(
-            birulight: birulight,
-            pintuNitipFunction: nitipFunction,
-            nitipValue: slidervalue,
-          ),
-        );
-      },
-    );
+    // showModalBottomSheet(
+    //   context: context,
+    //   builder: (builder) {
+    //     return Container(
+    //       child: Flybtn(
+    //         birulight: birulight,
+    //         pintuNitipFunction: nitipFunction,
+    //         nitipValue: slidervalue,
+    //       ),
+    //     );
+    //   },
+    // );
   }
 
   void parsecsv() {
@@ -256,16 +256,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
       backgroundColor: Color.fromRGBO(236, 241, 245, 1),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.phone,
-              size: 20,
-              color: Colors.red,
-            ),
-            onPressed: parsecsv,
-          )
-        ],
+        actions: <Widget>[],
         title: Center(
           child: Text(
             'Al Qawaidul Arba',
@@ -386,7 +377,7 @@ class _ScreenAwalState extends State<ScreenAwal> {
         backgroundColor: birulight,
         splashColor: Colors.black38,
         child: Icon(
-          Icons.text_fields,
+          Icons.navigate_next,
           size: 20,
         ),
         onPressed: _showModalSheet,
