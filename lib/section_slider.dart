@@ -214,13 +214,12 @@ class _SectionSliderState extends State<SectionSlider> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(236, 241, 245, 1),
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
-        actions: <Widget>[],
-        title: Center(
-          child: Text(
-            'Al Qawaidul Arba',
-            style: TextStyle(color: Colors.black),
-          ),
+        // actions: <Widget>[],
+        title: Text(
+          'Al Qawaidul Arba',
+          style: TextStyle(color: Colors.black),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
