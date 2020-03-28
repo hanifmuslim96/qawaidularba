@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qawaidularba/section_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   Color biru = Color.fromRGBO(0, 182, 251, 0.9);
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+    var ww = MediaQuery.of(context).size.width*0.7;
     return Scaffold(
       backgroundColor: biru,
       appBar: AppBar(
@@ -127,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 4.0),
                               child: Container(
-                                width: 350,
+                                width: ww,
                                 decoration: BoxDecoration(
                                   color: Color.fromRGBO(236, 241, 245, 1),
                                   borderRadius:
@@ -173,7 +179,7 @@ class HomeScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 4.0),
                               child: Container(
-                                width: 350,
+                                width: ww,
                                 decoration: BoxDecoration(
                                   color: Color.fromRGBO(236, 241, 245, 1),
                                   borderRadius:
@@ -219,7 +225,7 @@ class HomeScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 4.0),
                               child: Container(
-                                width: 350,
+                                width: ww,
                                 decoration: BoxDecoration(
                                   color: Color.fromRGBO(236, 241, 245, 1),
                                   borderRadius:
@@ -265,7 +271,7 @@ class HomeScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 4.0),
                               child: Container(
-                                width: 350,
+                                width: ww,
                                 decoration: BoxDecoration(
                                   color: Color.fromRGBO(236, 241, 245, 1),
                                   borderRadius:
@@ -311,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 4.0),
                               child: Container(
-                                width: 350,
+                                width: ww,
                                 decoration: BoxDecoration(
                                   color: Color.fromRGBO(236, 241, 245, 1),
                                   borderRadius:

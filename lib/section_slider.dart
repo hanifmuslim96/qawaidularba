@@ -203,6 +203,12 @@ class _SectionSliderState extends State<SectionSlider> {
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
     if (dataDalamList == null) {
       return Scaffold(
         body: Center(
