@@ -41,11 +41,9 @@ class _SectionSliderState extends State<SectionSlider> {
 
   List<Widget> renderArab(pintu) {
     List<Widget> temp = [];
-    print(pintu);
 
     var rawKasarArabic = dataDalamList[pintu[2] - 1][0].split("*");
 
-    print("Print here");
     for (var i = 0; i < rawKasarArabic.length; i++) {
       Color warna = i == indexArab ? Colors.black38 : Colors.transparent;
       String data = rawKasarArabic[i];
@@ -95,24 +93,38 @@ class _SectionSliderState extends State<SectionSlider> {
   }
 
   List<Widget> renderIndo(pintu) {
-    print(pintu);
+    // print(pintu);
+
     List<Widget> temp = [];
-    var rawKasarBahasa = dataDalamList[pintu[2] - 1][1].split("*");
+    List<Widget> temp2 = [];
+
+    var dataSlide = dataDalamList[pintu[2] - 1];
+    var rawKasarBahasa = dataSlide[1].split("*");
+    var rawMapping = dataSlide[3].split("*").map(int.parse).toList();
+    var slideNoBerapa = dataSlide[2] - 1;
+
+    print("Informasi : $indexSlide");
+    print("Informasi : $slideNoBerapa");
+    print("Informasi : ${slideNoBerapa == indexSlide}");
 
     for (var i = 0; i < rawKasarBahasa.length; i++) {
       //# JANGAN LEWAT WOY< KALAU, NULL
       Color warna, warnafont;
       double bgklik;
-      if (indexArab == null) {
+      if ((indexArab == null)) {
+        warna = Colors.transparent;
+        bgklik = 0;
+        warnafont = Colors.black;
+      } else if ((slideNoBerapa != indexSlide)) {
         warna = Colors.transparent;
         bgklik = 0;
         warnafont = Colors.black;
       } else {
-        warna = i == mapping[indexArab]
+        warna = i == rawMapping[indexArab] - 1
             ? Color.fromRGBO(0, 182, 251, 0.9)
             : Colors.transparent;
-        bgklik = i == mapping[indexArab] ? 4 : 0;
-        warnafont = i == mapping[indexArab]
+        bgklik = i == rawMapping[indexArab] - 1 ? 4 : 0;
+        warnafont = i == rawMapping[indexArab] - 1
             ? warnafont = Colors.white
             : warnafont = Colors.black;
       }
@@ -141,11 +153,12 @@ class _SectionSliderState extends State<SectionSlider> {
       );
       temp.add(widget);
     }
+    print("KERENDER DONG");
     return temp;
   }
 
   nitipFunction(x) {
-    print(x);
+    // print(x);
     slidervalue = x;
     setState(() {});
   }
@@ -167,15 +180,16 @@ class _SectionSliderState extends State<SectionSlider> {
 
   void parsecsv() {
     _parsecsv();
-    print("Print here");
+    // print("Print here");
   }
 
   Future<void> _parsecsv() async {
-    String data = await rootBundle.loadString('data/content${widget.index}.tsv');
+    String data =
+        await rootBundle.loadString('./data/content${widget.index}.tsv');
     await Future.delayed(Duration(seconds: 2));
     List<List<dynamic>> _dataDalamList =
         CsvToListConverter(fieldDelimiter: "\t").convert(data);
-    print(_dataDalamList);
+    // print(_dataDalamList);
     _dataDalamList.removeAt(0);
     dataDalamList = _dataDalamList;
     setState(() {});
@@ -219,8 +233,9 @@ class _SectionSliderState extends State<SectionSlider> {
         width: MediaQuery.of(context).size.width,
         child: CarouselSlider(
           onPageChanged: (a) {
-            print("Print here");
+            print("Pindah Halaman");
             indexArab = null;
+            indexSlide = a;
             setState(() {});
           },
           viewportFraction: 1.0,
@@ -228,7 +243,7 @@ class _SectionSliderState extends State<SectionSlider> {
           // reverse: false,
           enableInfiniteScroll: false,
           items: dataDalamList.map((url) {
-            print(url);
+            // print(url);
             return Column(
               children: <Widget>[
                 Expanded(
