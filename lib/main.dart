@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 void main() {
   runApp(AplikasiBermanfaat());
@@ -95,9 +96,17 @@ class _ScreenAwalState extends State<ScreenAwal> {
     'kebahagiaan.',
   ];
 
-  List<Widget> renderArab() {
+  final List<String> imgList = [
+    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=400&q=80',
+    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=400&q=80',
+  ];
+
+  List<Widget> renderArab(pintu) {
     List<Widget> temp = [];
-    var rawKasarArabic = dataDalamList[indexSlide][0].split("*");
+    print(pintu);
+
+    var rawKasarArabic = dataDalamList[pintu[2]-1][0].split("*");
+    
     print("Print here");
     for (var i = 0; i < rawKasarArabic.length; i++) {
       Color warna = i == indexArab ? Colors.black38 : Colors.transparent;
@@ -147,9 +156,10 @@ class _ScreenAwalState extends State<ScreenAwal> {
     return temp;
   }
 
-  List<Widget> renderIndo() {
+  List<Widget> renderIndo(pintu) {
+    print(pintu);
     List<Widget> temp = [];
-    var rawKasarBahasa = dataDalamList[indexSlide][1].split("*");
+    var rawKasarBahasa = dataDalamList[pintu[2]-1][1].split("*");
 
     for (var i = 0; i < rawKasarBahasa.length; i++) {
       //# JANGAN LEWAT WOY< KALAU, NULL
@@ -270,108 +280,120 @@ class _ScreenAwalState extends State<ScreenAwal> {
           ),
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(236, 241, 245, 1),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+      body: CarouselSlider(
+        // reverse: false,
+        enableInfiniteScroll: false,
+        items: dataDalamList.map((url) {
+          print(url);
+          return Column(
+            children: <Widget>[
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   child: Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(236, 241, 245, 1),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              color: birulight,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            padding: EdgeInsets.all(10),
-                            child: DefaultTextStyle(
-                              style: Theme.of(context).textTheme.title.copyWith(
-                                    color: Colors.white,
-                                  ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  Text(
-                                    '  Arabic',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Wrap(
-                                    textDirection: TextDirection.rtl,
-                                    spacing: 1,
-                                    alignment: WrapAlignment.start,
-                                    runSpacing: 1,
+                      child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: birulight,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                padding: EdgeInsets.all(10),
+                                child: DefaultTextStyle(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .title
+                                      .copyWith(
+                                        color: Colors.white,
+                                      ),
+                                  child: Column(
                                     crossAxisAlignment:
-                                        WrapCrossAlignment.center,
-                                    // textDirection: TextDirection.rtl,
+                                        CrossAxisAlignment.stretch,
                                     children: <Widget>[
-                                      ...renderArab(),
+                                      Text(
+                                        '  Arabic',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Wrap(
+                                        textDirection: TextDirection.rtl,
+                                        spacing: 1,
+                                        alignment: WrapAlignment.start,
+                                        runSpacing: 1,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        // textDirection: TextDirection.rtl,
+                                        children: <Widget>[
+                                          ...renderArab(url),
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                          Container(
-                            color: Colors.transparent,
-                            child: SizedBox(
-                              height: 20,
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            padding: EdgeInsets.all(20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                Text(
-                                  'Indonesian',
-                                  style: TextStyle(
-                                    color: birulight,
-                                    fontSize: 16,
-                                  ),
+                              Container(
+                                color: Colors.transparent,
+                                child: SizedBox(
+                                  height: 20,
                                 ),
-                                SizedBox(
-                                  height: 5,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                 ),
-                                Wrap(
-                                  textDirection: TextDirection.ltr,
+                                padding: EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: <Widget>[
-                                    ...renderIndo(),
+                                    Text(
+                                      'Indonesian',
+                                      style: TextStyle(
+                                        color: birulight,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Wrap(
+                                      textDirection: TextDirection.ltr,
+                                      children: <Widget>[
+                                        ...renderIndo(url),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Text('sumber : muslim.or.id'),
-        ],
+              Text('sumber : muslim.or.id'),
+            ],
+          );
+        }).toList(),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: birulight,
