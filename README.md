@@ -8,20 +8,20 @@ A beautiful arabic book reader featured by word translation,
 
 ### Word Tap Translation 
 - Easily translate by tapping the arabic word.
-<div style="text-align:center"><img src="all.gif" alt="drawing" width="150"/></div>
+<div style="margin :auto;border: 3px solid #73AD21;width: 60%;><div style="text-align:center"><img src="all.gif" alt="drawing" width="150"/></div></div>
 
 ### Touch Support
 - Enjoy the best User Experience in Reading Quran by using Touch Gesture
 ### High Readability
 - Adjustable font size to maximize your reading convenience
-<div style="text-align:center"><img src="font_size.gif" alt="drawing" width="150"/></div>
+<div style="margin :auto;border: 3px solid #73AD21;width: 60%;><div style="text-align:center"><img src="font_size.gif" alt="drawing" width="150"/></div></div>
 
 ### Offline-user-first
 - No need to access internet anymore to read the book, it's embedded in simple tsv data
 
 ### Simple Home Screen
 - Simple and neat home screen UI
-<div style="text-align:center"><img src="back_screen.gif" alt="drawing" width="150"/></div>
+<div style="margin :auto;border: 3px solid #73AD21;width: 60%;><div style="text-align:center"><img src="back_screen.gif" alt="drawing" width="150"/></div></div>
 
 
 ## Sources
