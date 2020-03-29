@@ -31,4 +31,4 @@ Nabil MRAD - Hamah, Syrian Arab Republic
 - [Ara Hamah Kilania Font](https://arbfonts.com/ara-hamah-kilania-font-download.html) : " Stylish, modern, and neat arabic font " by Nabil MRAD
 
 ## License
-This project is licensed under the MIT license, Copyright (c) 2020 hanifmuslim96. For more information see LICENSE.md.
+This project is licensed under the MIT license, Copyright (c) 2020 hanifmuslim96. For more information see [LICENSE](LICENSE).
